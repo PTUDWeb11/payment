@@ -22,11 +22,16 @@ export default (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				field: 'id',
 			},
-			user_id: {
+			userId: {
 				unique: true,
 				allowNull: false,
 				type: DataTypes.INTEGER,
 				field: 'user_id',
+			},
+			client: {
+				allowNull: false,
+				type: DataTypes.STRING,
+				field: 'client',
 			},
 			email: {
 				unique: true,

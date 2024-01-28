@@ -19,8 +19,17 @@ export async function up(queryInterface, Sequelize) {
 			type: Sequelize.INTEGER,
 			field: 'receive_user_id',
 		},
+		amount: {
+			allowNull: false,
+			type: Sequelize.FLOAT,
+			field: 'amount',
+		},
 		status: {
 			type: Sequelize.ENUM('pending', 'success', 'failed', 'expired'),
+		},
+		callback_url: {
+			type: Sequelize.STRING,
+			field: 'callback_url',
 		},
 		createdAt: {
 			allowNull: false,

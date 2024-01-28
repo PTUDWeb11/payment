@@ -5,6 +5,7 @@ export async function up(queryInterface, Sequelize) {
 	return queryInterface.bulkInsert('users', [
 		{
 			user_id: 0,
+			client: 'master', // receiver
 			email: 'payment@poshop.com',
 			name: 'POSHOP LTD.',
 			balance: 0,

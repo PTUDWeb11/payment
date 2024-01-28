@@ -1,6 +1,7 @@
 class Response {
 	constructor(res) {
 		this.res = res;
+		this.statusCode = 200;
 		this.body = {};
 	}
 
@@ -26,6 +27,10 @@ class Response {
 
 	success() {
 		return this.res.status(200).json({ success: true });
+	}
+
+	html(view, data = null) {
+		return this.res.render(view, data);
 	}
 }
 

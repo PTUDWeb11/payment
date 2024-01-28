@@ -1,4 +1,5 @@
 'use strict';
+import { transactionConfig } from '@/config';
 import { Model } from 'sequelize';
 export default (sequelize, DataTypes) => {
 	class Transaction extends Model {
@@ -32,8 +33,17 @@ export default (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				field: 'receive_user_id',
 			},
+			amount: {
+				allowNull: false,
+				type: DataTypes.FLOAT,
+				field: 'amount',
+			},
 			status: {
 				type: DataTypes.ENUM('pending', 'success', 'failed', 'expired'),
+			},
+			callbackUrl: {
+				type: DataTypes.STRING,
+				field: 'callback_url',
 			},
 			createdAt: {
 				allowNull: false,
@@ -57,8 +67,18 @@ export default (sequelize, DataTypes) => {
 			sequelize,
 			modelName: 'Transaction',
 			paranoid: true,
-			tableName: 'transaction',
+			tableName: 'transactions',
 		}
 	);
+
+	Transaction.beforeCreate((transaction, _) => {
+		if (!transaction.status) {
+			transaction.status = 'pending';
+		}
+		if (transaction.receiveUserId == null) {
+			transaction.receiveUserId = transactionConfig.receiver;
+		}
+	});
+
 	return Transaction;
 };

@@ -9,11 +9,16 @@ export async function up(queryInterface, Sequelize) {
 			type: Sequelize.INTEGER,
 			field: 'id',
 		},
-		user_id: {
+		userId: {
 			unique: true,
 			allowNull: false,
 			type: Sequelize.INTEGER,
 			field: 'user_id',
+		},
+		client: {
+			allowNull: false,
+			type: Sequelize.STRING,
+			field: 'client',
 		},
 		email: {
 			unique: true,

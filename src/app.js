@@ -5,6 +5,8 @@ import logger from 'morgan';
 import express from 'express';
 import compression from 'compression';
 import createError from 'http-errors';
+import { engine } from 'express-handlebars';
+import path from 'path';
 
 import * as configs from '@/config';
 import { authenticationMiddleware } from '@/middlewares';
@@ -17,6 +19,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(configs.corsConfig));
 app.use(compression(configs.compressionConfig));
+
+app.use('/static', express.static(path.join(__dirname, 'views', 'static')));
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views', 'html'));
 
 // Custom middleware list
 app.use(authenticationMiddleware);

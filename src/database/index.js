@@ -3,6 +3,8 @@ import { Sequelize, DataTypes } from 'sequelize';
 import * as config from '@/config/sequelize';
 
 // import models
+import userModel from '@/database/models/user';
+import transactionModel from '@/database/models/transaction';
 
 // Configuration
 const env = process.env.NODE_ENV;
@@ -12,7 +14,7 @@ const sequelizeConfig = config[env];
 const sequelize = new Sequelize(sequelizeConfig);
 
 // Import all model files
-const modelDefiners = [];
+const modelDefiners = [userModel, transactionModel];
 
 // eslint-disable-next-line no-restricted-syntax
 for (const modelDefiner of modelDefiners) {
