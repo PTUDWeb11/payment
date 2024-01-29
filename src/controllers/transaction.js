@@ -31,7 +31,11 @@ export const createTransaction = async (req, res, next) => {
 			return next(createError(500, 'Failed to create transaction'));
 		}
 
-		return new Response(res).json(newTransaction);
+		const newToken = tokenHelper.generateToken({
+			transaction_id: newTransaction.id,
+		});
+
+		return new Response(res).json({ token: newToken });
 	} catch (err) {
 		return next(err);
 	}
